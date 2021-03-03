@@ -1,9 +1,10 @@
 name: Dependency check
 on:
   schedule:
-  # TODO: fix interval to run once a week
-  # run every minute
-  - cron: "* * * * *"
+    # TODO: fix interval to run once a week
+    # run every minute
+    - cron: "* * * * *"
+  workflow_dispatch:
 
 jobs:
     check-dependencies:
