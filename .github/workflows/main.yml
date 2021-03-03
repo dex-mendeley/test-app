@@ -2,8 +2,8 @@ name: Dependency check
 on:
   schedule:
     # TODO: fix interval to run once a week
-    # run every minute
-    - cron: "* * * * *"
+    # run every day at 2pm
+    - cron: "0 14 * * *"
   workflow_dispatch:
 
 jobs:
