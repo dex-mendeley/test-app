@@ -1,0 +1,25 @@
+name: Dependency check
+on:
+  schedule:
+  # TODO: fix interval to run once a week
+  # run every minute
+  - cron: "* * * * *"
+
+jobs:
+    check-dependencies:
+    # Run on ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Run yarn install
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+
+      # Run yarn outdated
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: outdated 
