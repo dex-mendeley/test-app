@@ -22,5 +22,19 @@ jobs:
 
       # Run yarn outdated
       - uses: borales/actions-yarn@v2.0.0
+        id: get_outdated_dependencies
         with:
           cmd: outdated 
+    
+      - name: Notify Slack about deployment fail
+        if: failure() # Only notify Slack if dependencies are out of date
+        uses: wearerequired/slack-messaging-action@v1
+        with:
+          bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channel: random
+          payload: >-
+            {
+                "icon_emoji": ":warning:",
+                "username": "Dependency checker",
+                "text": "Out of date dependencies: \n ${{join(steps.get_outdated_dependencies.*, '\n')}}"
+            }
