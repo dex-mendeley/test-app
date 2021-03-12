@@ -16,12 +16,12 @@ jobs:
       - uses: actions/checkout@v2
 
       # Check for deprecated versions
-      - uses: dex-mendeley/check-dependencies-action@v1.4
+      - uses: dex-mendeley/check-dependencies-action@v1.5
         id: get_outdated_dependencies
     
       - name: Notify Slack about dependencies
-        uses: dex-mendeley/send-slack-message-action@v1.7
+        uses: dex-mendeley/send-slack-message-action@v1.15
         with:
           bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
           channel_id: C01R1KE835Y
-          message: ${{steps.get_outdated_dependencies.outputs.deprecated}}
+          message: "${{steps.get_outdated_dependencies.outputs.deprecated}}"
