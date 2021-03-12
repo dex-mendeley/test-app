@@ -15,22 +15,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # # Run yarn install
-      # - uses: borales/actions-yarn@v2.0.0
-      #   with:
-      #     cmd: install
-
-      # # Run yarn outdated
-      # - uses: borales/actions-yarn@v2.0.0
-      #   id: get_outdated_dependencies
-      #   with:
-      #     cmd: outdated 
-
       # Check for deprecated versions
       - uses: dex-mendeley/check-dependencies-action@v1.4
         id: get_outdated_dependencies
     
       - name: Notify Slack about dependencies
-        uses: dex-mendeley/send-slack-message-action@v1.5
+        uses: dex-mendeley/send-slack-message-action@v1.7
         with:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channel_id: C01R1KE835Y
+          message: ${{steps.get_outdated_dependencies.outputs.deprecated}}
