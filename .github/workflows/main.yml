@@ -27,16 +27,10 @@ jobs:
       #     cmd: outdated 
 
       # Check for deprecated versions
-      - uses: dex-mendeley/check-dependencies-action/v1
+      - uses: dex-mendeley/check-dependencies-action@v1.4
+        id: get_outdated_dependencies
     
       - name: Notify Slack about dependencies
-        uses: wearerequired/slack-messaging-action@v1
+        uses: dex-mendeley/send-slack-message-action@v1.1
         with:
-          bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
-          channel: general
-          payload: >-
-            {
-                "icon_emoji": ":warning:",
-                "username": "Dependency checker",
-                "text": "Out of date dependencies:\n ${{ toJSON(steps.get_outdated_dependencies.outputs) }}"
-            }
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
