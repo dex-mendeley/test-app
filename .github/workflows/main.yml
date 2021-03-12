@@ -31,6 +31,6 @@ jobs:
         id: get_outdated_dependencies
     
       - name: Notify Slack about dependencies
-        uses: dex-mendeley/send-slack-message-action@v1.1
+        uses: dex-mendeley/send-slack-message-action@v1.5
         with:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
